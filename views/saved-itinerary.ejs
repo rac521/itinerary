@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Itineraries</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .container { max-width: 800px; margin: auto; }
+        .itinerary { border: 1px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Your Saved Itineraries</h1>
+    
+    <div class="container">
+        <% if (itineraries.length > 0) { 
+            let currentTripId = null; // To track unique trips
+        %>
+            <% itineraries.forEach((itinerary, index) => { %>
+                <% if (currentTripId !== itinerary.trip_id) { 
+                    currentTripId = itinerary.trip_id; 
+                %>
+                    <h2><%= itinerary.trip_name %> - <%= itinerary.destination %></h2> <!-- Show trip details once -->
+                <% } %>
+                <div class="itinerary">
+                    <p>Day <%= itinerary.day_number %>: <%= itinerary.activity_order %></p>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>No saved itineraries found.</p>
+        <% } %>
+    </div>
+    
+
+    <button class="btn" onclick="location.href='/'">Back to Dashboard</button>
+
+</body>
+</html>
